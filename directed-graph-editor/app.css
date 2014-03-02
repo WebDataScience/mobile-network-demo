@@ -1,0 +1,114 @@
+
+#log{
+  border:dashed 1px red;
+  float:left;
+  width:200px;
+  height: 500px;
+}
+
+#log label{
+  margin:10px;
+  font-weight: bold;
+}
+#clearLog{
+
+        border:solid 1px grey;
+
+
+
+        width: 150px;
+        clear:both;
+}
+#clearLog:hover{
+        cursor: pointer;
+}
+
+.button-green {
+    background-clip: padding-box;
+    background-color: #89BF42;
+    border-radius: 3px;
+    box-shadow: 0 3px 0 #5D901A;
+    color: #FFFFFF !important;
+    display: inline-block;
+    font-family: 'proxima-nova',arial,helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 18px;
+    margin-top: 2px;
+    padding: 5px 16px 4px;
+}
+
+.button-blue {
+    background-clip: padding-box;
+    background-color: #00A4E7;
+    border-radius: 3px;
+    box-shadow: 0 3px 0 #007AAC;
+    color: #FFFFFF !important;
+    display: inline-block;
+    font-family: 'proxima-nova',arial,helvetica,sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    line-height: 18px;
+    margin-top: 2px;
+    padding: 5px 16px 4px;
+}
+
+
+svg {
+  background-color: #FFF;
+  cursor: default;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  -o-user-select: none;
+  user-select: none;
+  border:dashed 1px red;
+}
+
+svg:not(.active):not(.ctrl) {
+  cursor: crosshair;
+}
+
+path.link {
+  fill: none;
+  stroke: #000;
+  stroke-width: 4px;
+  cursor: default;
+}
+
+svg:not(.active):not(.ctrl) path.link {
+  cursor: pointer;
+}
+
+path.link.selected {
+  stroke-dasharray: 10,2;
+}
+
+path.link.dragline {
+  pointer-events: none;
+}
+
+path.link.hidden {
+  stroke-width: 0;
+}
+
+circle.node {
+  stroke-width: 1.5px;
+  cursor: pointer;
+}
+
+circle.node.reflexive {
+  stroke: #000 !important;
+  stroke-width: 2.5px;
+}
+
+text {
+  font: 12px sans-serif;
+  pointer-events: none;
+}
+
+text.id {
+  text-anchor: middle;
+  font-weight: bold;
+}
+

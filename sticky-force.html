@@ -18,6 +18,16 @@
   fill: #f00;
 }
 
+text {
+  font: 12px sans-serif;
+  pointer-events: none;
+}
+
+text.id {
+  text-anchor: middle;
+  font-weight: bold;
+}
+
 </style>
 <body>
 <script src="d3.v3.min.js"></script>
@@ -58,8 +68,25 @@ d3.json("startgraph.json", function(error, graph) {
       .attr("r", 12)
       .on("dblclick", dblclick)
       .call(drag);
+
+   // show node IDs
+  node.append('svg:text')
+      .attr('x', 0)
+      .attr('y', 4)
+      .attr('class', 'id')
+      .text(function(d) { 
+        console.log(d.name);
+        return d.name; });
+      
+
+
+
 });
 
+function label() {
+  node.attr("text-anchor", "middle")
+      .text(function(d) {return d.name});
+}
 function tick() {
   link.attr("x1", function(d) { return d.source.x; })
       .attr("y1", function(d) { return d.source.y; })
