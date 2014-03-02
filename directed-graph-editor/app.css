@@ -1,12 +1,24 @@
+#graph-details{
+  position: fixed;
+  top: 650px;
+  width:100%;
+}
+#nodes, #edges{
+  border:dashed 1px red;
 
+}
+#node-details{
+  width:100%;
+
+}
 #log{
   border:dashed 1px red;
-  float:left;
-  width:200px;
+  float:right;
+  width:400px;
   height: 500px;
 }
 
-#log label{
+label{
   margin:10px;
   font-weight: bold;
 }

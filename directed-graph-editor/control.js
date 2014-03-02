@@ -1,5 +1,5 @@
 // set up SVG for D3
-var width  = 960,
+var width  = 660,
     height = 500,
     colors = d3.scale.category10();
 
@@ -28,9 +28,9 @@ var force = d3.layout.force()
     .nodes(nodes)
     .links(links)
     .size([width, height])
-    .linkDistance(150)
+    .linkDistance(200)
     .charge(-500)
-    .on('tick', tick)
+   .on('tick', tick)
 
 // define arrow markers for graph links
 svg.append('svg:defs').append('svg:marker')
@@ -64,6 +64,8 @@ var drag_line = svg.append('svg:path')
 var path = svg.append('svg:g').selectAll('path'),
     circle = svg.append('svg:g').selectAll('g');
 
+   
+
 // mouse event vars
 var selected_node = null,
     selected_link = null,
@@ -79,7 +81,6 @@ function resetMouseVars() {
 
 // update force layout (called automatically each iteration)
 function tick() {
- // log("tick");
   // draw directed edges with proper padding from node centers
   path.attr('d', function(d) {
     var deltaX = d.target.x - d.source.x,
@@ -94,18 +95,20 @@ function tick() {
         targetX = d.target.x - (targetPadding * normX),
         targetY = d.target.y - (targetPadding * normY);
     result = 'M' + sourceX + ',' + sourceY + 'L' + targetX + ',' + targetY;
-   // log(result);
     return result;
   });
 
   circle.attr('transform', function(d) {
     return 'translate(' + d.x + ',' + d.y + ')';
   });
+
+
 }
 
 // update graph (called when needed)
 function restart() {
-  // path (link) group
+
+   // path (link) group
   path = path.data(links);
 
   // update existing links
@@ -130,6 +133,8 @@ function restart() {
       selected_node = null;
       restart();
     });
+
+
 
   // remove old links
   path.exit().remove();
@@ -224,6 +229,7 @@ function restart() {
       // select new link
       selected_link = link;
       selected_node = null;
+
       restart();
     });
 
@@ -237,8 +243,14 @@ function restart() {
   // remove old nodes
   circle.exit().remove();
 
+  listAllNodes();
+  listAllEdges();
+
   // set the graph in motion
   force.start();
+
+
+
 }
 
 function mousedown() {
@@ -258,6 +270,7 @@ function mousedown() {
   nodes.push(node);
 
   restart();
+  //log("New Point: " + point);
 }
 
 function mousemove() {
@@ -282,6 +295,8 @@ function mouseup() {
 
   // clear mouse event vars
   resetMouseVars();
+
+ 
 }
 
 function spliceLinksForNode(node) {
@@ -291,6 +306,7 @@ function spliceLinksForNode(node) {
   toSplice.map(function(l) {
     links.splice(links.indexOf(l), 1);
   });
+
 }
 
 // only respond once per keydown
@@ -362,20 +378,78 @@ function keyup() {
       .on('touchstart.drag', null);
     svg.classed('ctrl', false);
   }
+  
 }
 
 
 
+function getLinkDistance(){
 
+  dist = 1000 * Math.random(); 
+  console.log(dist);ƒ
+  log("distance:" + dist);
+  return dist;
+}
+
+
+//main app functionality
+function onLoad(){
+  $("#clearLog").click(clearLog);
+}
+
+
+
+/* Log a message */
 function log(msg){
-  var log = document.getElementById('log-details');
-  console.log(msg)
-  log.insertAdjacentHTML('afterbegin', msg + "</br>");
+  console.log(msg);
+  $("#log-details").append("<div>" + msg + "</div>");
 }
 
 function clearLog(){
   console.log("clear log");
-  var log = document.getElementById('log-details');
-  log.innerHTML = "";
+   $("#log-details").empty();
 }
+
+/* List the current nodes */
+function listNodes(nodes){
+  $("#node-details").empty();  
+  $("#node-details").append(JSON.stringify(nodes));
+}
+
+/* Print all Nodes in the graph to the Node Details Pane */
+function listAllNodes(){
+  $("#node-details").empty();
+  n = d3.selectAll(nodes);
+  $.each(n, function(key, value){
+      $("#node-details").append("<div>" + JSON.stringify(value, null, '\t') + "</div>");
+      }
+    );
+}
+
+/* List all Edges in the graph to the Edge Details Pane */
+function listAllEdges(){
+  $("#edge-details").empty();
+  n = d3.selectAll(links);
+  $.each(n, function(key, link){
+      $("#edge-details").append("<div>" + JSON.stringify(link, null, '\t') + "</div>");
+      }
+    );
+}
+
+
+
+
+
+
+
+// app starts here
+svg.on('mousedown', mousedown)
+  .on('mousemove', mousemove)
+  .on('mouseup', mouseup);
+d3.select(window)
+  .on('keydown', keydown)
+  .on('keyup', keyup);
+restart();
+
+
 

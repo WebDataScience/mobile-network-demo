@@ -6,26 +6,34 @@
     <link rel="stylesheet" href="app.css">
   </head>
   
-  <body>
+  <body onload="onLoad();" >
 
-  <div class="gist-readme"><p>Click in the open space to <strong>add a node</strong>, drag from one node to another to <strong>add an edge</strong>. <br>
-Ctrl-drag a node to <strong>move</strong> the graph layout. <br>
+  <div class="gist-readme"><p>Click in the open space to <strong>add a node</strong>, drag from one node to another to <strong>add an edge</strong>. Ctrl-drag a node to <strong>move</strong> the graph layout.
 Click a node or an edge to <strong>select</strong> it.</p>
 
-<p>When a node is selected: <strong>R</strong> toggles reflexivity, <strong>Delete</strong> removes the node. <br>
+<p>When a node is selected: <strong>R</strong> toggles reflexivity, <strong>Delete</strong> removes the node.
 When an edge is selected: <strong>L</strong>(eft), <strong>R</strong>(ight), <strong>B</strong>(oth) change direction, <strong>Delete</strong> removes the edge.</p>
 
-<p>To see this example as part of a larger project, check out <a href="http://rkirsling.github.com/modallogic/">Modal Logic Playground</a>!</p></div>
-
+<p>To see this example as part of a larger project, check out <a href="http://rkirsling.github.com/modallogic/">Modal Logic Playground</a>!</p>
+</div>
 
 <div id="log">
-<label for="log">Actions Log</label>
-<div id="clearLog" class="button-blue">Clear Log </div>
-<div id="log-details">
+ 
+  <div id="clearLog" class="button-blue">Clear Log </div>
+  <div id="log-details"></div>
+</div>
+<div id="graph-details">
+<div id="nodes">
+  <label for="nodes">Node Details</label>
+  <div id="node-details"></div>
+</div>
+<div id="edges">
+  <label for="nodes">Edge Details</label>
+  <div id="edge-details"></div>
+</div>
 </div>
 
 
-</div>
   </body>
 
   <script src='http://code.jquery.com/jquery-latest.min.js' type='text/javascript'></script>
