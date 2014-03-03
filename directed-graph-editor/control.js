@@ -395,8 +395,13 @@ function getLinkDistance(){
 //main app functionality
 function onLoad(){
   $("#clearLog").click(clearLog);
-  $("#traverseNetwork").click(traverseNetwork(0,20));
+  $("#traverseNetwork").click(
+    function(){
+      traverseNetwork(0,10);
+    }
+    );
 }
+
 
 
 
@@ -438,11 +443,15 @@ function listAllEdges(){
 }
 
 
-/* Traverse network */
+/* Traverse network 
+
+    todo: 
+          add node coloring
+          add edge coloring
+          traverse multiple edges
+
+    */
 function traverseNetwork(nid, depth){
-
-  //nodes[nid].attr('class', 'traversed');
-
   if(nid < links.length && depth > 0){
     depth--;
     target_id = links[nid].target.id;
@@ -450,20 +459,12 @@ function traverseNetwork(nid, depth){
     traverseNetwork(target_id, depth);
   }
 
-  //paint the node
-  //find the edges
-  //paint the edges
-  //get next node
-
-
+ 
 }
 /* Given a source node, returns a destination node / nodes */
 
 function getNextNodeID(node){
-
   return links[node.id].target.id;
-  
-
 }
 
 
