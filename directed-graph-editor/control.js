@@ -456,23 +456,28 @@ function traverseNetwork(nid, depth){
 
   console.log("nid=" + nid);
 
-     depth--;
-   
+    //add a control so we don't go into an infinite loop
+    depth--;
 
-
+    //paint the node we are traverseing
     c = d3.selectAll('#id' + nid);
     c.style("fill", "red");
     c.classed({"traversed": true});
 
 
+  // if we have another edge to traverse, 
+  // recursively call traverseNetwork
   if(nid < links.length && depth > 0){
- 
     target_id = links[nid].target.id;
     console.log("next nid=" + target_id);
 
+    
+      
+  setTimeout(function() {
+    traverseNetwork(target_id, depth)
+  }, 1000);
 
-
-    traverseNetwork(target_id, depth);
+    //traverseNetwork(target_id, depth);
   }
 
  
