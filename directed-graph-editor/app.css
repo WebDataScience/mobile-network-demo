@@ -111,8 +111,9 @@ circle.node.reflexive {
   stroke-width: 2.5px;
 }
 
-circle.node.traversed{
-  stroke: #fff;
+.traversed{
+  stroke: #fff !important;
+  stroke-width: 2.5px;
 }
 
 text {

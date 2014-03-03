@@ -153,6 +153,7 @@ function restart() {
   var g = circle.enter().append('svg:g');
 
   g.append('svg:circle')
+    .attr('id',  function(d) {return  'id' + d.id})
     .attr('class', 'node')
     .attr('r', 12)
     .style('fill', function(d) { return (d === selected_node) ? d3.rgb(colors(d.id)).brighter().toString() : colors(d.id); })
@@ -450,12 +451,27 @@ function listAllEdges(){
           add edge coloring
           traverse multiple edges
 
-    */
+*/
 function traverseNetwork(nid, depth){
+
+  console.log("nid=" + nid);
+
+     depth--;
+   
+
+
+    c = d3.selectAll('#id' + nid);
+    c.style("fill", "red");
+    c.classed({"traversed": true});
+
+
   if(nid < links.length && depth > 0){
-    depth--;
+ 
     target_id = links[nid].target.id;
-    console.log("next id is:" + target_id + "depth is: " + depth);
+    console.log("next nid=" + target_id);
+
+
+
     traverseNetwork(target_id, depth);
   }
 
