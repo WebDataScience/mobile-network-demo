@@ -436,6 +436,15 @@ function listAllEdges(){
     );
 }
 
+/* Given a source node, returns a destination node / nodes */
+
+function getNextNode(node){
+
+  id = node.id;
+  
+
+}
+
 
 
 
